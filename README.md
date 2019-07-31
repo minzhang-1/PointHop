@@ -2,7 +2,7 @@
 Created by Min Zhang, Haoxuan You, Pranav Kadam, Shan Liu, C.-C. Jay Kuo from University of Southern California.
 
 ### Introduction
-This work is an implementation of our [arXiv tech report](https://arxiv.org/abs/1907.12766). We proposed a novel explainable machine learning method for point cloud, called the PointHop method.
+This work is an official implementation of our [arXiv tech report](https://arxiv.org/abs/1907.12766). We proposed a novel explainable machine learning method for point cloud, called the PointHop method.
 
 We address the problem of unordered point cloud data using a space partitioning procedure and developing a robust descriptor that characterizes the relationship between a point and its one-hop neighbor in a PointHop unit. Furthermore, we used the Saab transform to reduce the attribute dimension in each PointHop unit. In the classification stage, we fed the feature vector to a classifier and explored ensemble methods to improve the classification performance. It was shown by experimental results that the training complexity of the PointHop method is significantly lower than that of state-of-the-art deep learning-based methods with comparable classification performance. 
 
