@@ -1,6 +1,8 @@
 # PointHop: *An Explainable Machine Learning Method for Point Cloud Classification*
 Created by Min Zhang, Haoxuan You, Pranav Kadam, Shan Liu, C.-C. Jay Kuo from University of Southern California.
 
+![introduction](https://github.com/minzhang-1/PointHop/tree/master/doc/intro.png)
+
 ### Introduction
 This work is an official implementation of our [arXiv tech report](https://arxiv.org/abs/1907.12766). We proposed a novel explainable machine learning method for point cloud, called the PointHop method.
 
