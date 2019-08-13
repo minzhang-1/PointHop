@@ -11,6 +11,7 @@ In this repository, we release code and data for training a PointHop classificat
 ### Citation
 If you find our work useful in your research, please consider citing:
 
+<<<<<<< HEAD
 	@article{zhang2019pointhop,
 	  title={PointHop: An Explainable Machine Learning Method for Point Cloud Classification},
 	  author={Zhang, Min and You, Haoxuan and Kadam, Pranav and Liu, Shan and Kuo, C-C Jay},
@@ -18,6 +19,8 @@ If you find our work useful in your research, please consider citing:
 	  year={2019}
 	}
 
+=======
+>>>>>>> 155b3b394ab8b9439c4f98ec12f6c50e803c5b8e
 ### Installation
 
 The code has been tested with Python 3.5. You may need to install h5py, pytorch, sklearn, pickle and threading packages.
