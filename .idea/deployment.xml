@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="minzhang@mcl-server.usc.edu:500">
+    <serverData>
+      <paths name="minzhang@mcl-server.usc.edu:500">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/Users/minzhang/Google_Drive/USC_Study/LabJob/3D_Point_Cloud/tmp" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>
