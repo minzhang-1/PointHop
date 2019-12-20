@@ -127,15 +127,15 @@ def gather_ops(nn_idx, pts):
     return pc_n.numpy()
 
 
-def calc_feature(pc_temp, pc_bin, pc_gather, sample):
-    value = np.multiply(pc_temp[:, :, :sample, :], pc_bin[:, :, :sample, :])
+def calc_feature(pc_temp, pc_bin, pc_gather):
+    value = np.multiply(pc_temp, pc_bin)
     value = np.sum(value, axis=2, keepdims=True)
-    num = np.sum(pc_bin[:, :, :sample, :], axis=2, keepdims=True)
+    num = np.sum(pc_bin, axis=2, keepdims=True)
     final = np.squeeze(value/num)
     pc_gather.append(final)
 
 
-def gather_fea(nn_idx, point_data, fea, n_sample):
+def gather_fea(nn_idx, point_data, fea):
     """
     nn_idx:(B, n_sample, K)
     pts:(B, N, dim)
@@ -181,23 +181,22 @@ def gather_fea(nn_idx, point_data, fea, n_sample):
     pc_gather6 = []
     pc_gather7 = []
     pc_gather8 = []
-    sample = n_sample
     threads = []
-    t1 = threading.Thread(target=calc_feature, args=(pc_temp, pc_bin[0], pc_gather1, sample))
+    t1 = threading.Thread(target=calc_feature, args=(pc_temp, pc_bin[0], pc_gather1))
     threads.append(t1)
-    t2 = threading.Thread(target=calc_feature, args=(pc_temp, pc_bin[1], pc_gather2, sample))
+    t2 = threading.Thread(target=calc_feature, args=(pc_temp, pc_bin[1], pc_gather2))
     threads.append(t2)
-    t3 = threading.Thread(target=calc_feature, args=(pc_temp, pc_bin[2], pc_gather3, sample))
+    t3 = threading.Thread(target=calc_feature, args=(pc_temp, pc_bin[2], pc_gather3))
     threads.append(t3)
-    t4 = threading.Thread(target=calc_feature, args=(pc_temp, pc_bin[3], pc_gather4, sample))
+    t4 = threading.Thread(target=calc_feature, args=(pc_temp, pc_bin[3], pc_gather4))
     threads.append(t4)
-    t5 = threading.Thread(target=calc_feature, args=(pc_temp, pc_bin[4], pc_gather5, sample))
+    t5 = threading.Thread(target=calc_feature, args=(pc_temp, pc_bin[4], pc_gather5))
     threads.append(t5)
-    t6 = threading.Thread(target=calc_feature, args=(pc_temp, pc_bin[5], pc_gather6, sample))
+    t6 = threading.Thread(target=calc_feature, args=(pc_temp, pc_bin[5], pc_gather6))
     threads.append(t6)
-    t7 = threading.Thread(target=calc_feature, args=(pc_temp, pc_bin[6], pc_gather7, sample))
+    t7 = threading.Thread(target=calc_feature, args=(pc_temp, pc_bin[6], pc_gather7))
     threads.append(t7)
-    t8 = threading.Thread(target=calc_feature, args=(pc_temp, pc_bin[7], pc_gather8, sample))
+    t8 = threading.Thread(target=calc_feature, args=(pc_temp, pc_bin[7], pc_gather8))
     threads.append(t8)
     for t in threads:
         t.setDaemon(False)

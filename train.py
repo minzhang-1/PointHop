@@ -8,15 +8,17 @@ import os
 import time
 
 parser = argparse.ArgumentParser()
+parser.add_argument('--num_batch_train', type=int, default=20, help='Batch Number')
+parser.add_argument('--num_batch_test', type=int, default=1, help='Batch Number')
 parser.add_argument('--initial_point', type=int, default=1024, help='Point Number [256/512/1024/2048]')
 parser.add_argument('--validation', default=False, help='Split train data or not')
 parser.add_argument('--ensemble', default=False, help='Ensemble or not')
 parser.add_argument('--rotation_angle', default=np.pi/4, help='Rotate angle')
 parser.add_argument('--rotation_freq', default=8, help='Rotate time')
 parser.add_argument('--log_dir', default='log', help='Log dir [default: log]')
-parser.add_argument('--num_point', default=[1024, 128, 128, 128], help='Point Number after down sampling')
-parser.add_argument('--num_sample', default=[[64], [64], [64], [64]], help='KNN query number')
-parser.add_argument('--num_filter', default=[[15], [25], [40], [80]], help='Filter Number ')
+parser.add_argument('--num_point', default=[1024, 128, 128, 64], help='Point Number after down sampling')
+parser.add_argument('--num_sample', default=[64, 64, 64, 64], help='KNN query number')
+parser.add_argument('--num_filter', default=[15, 25, 40, 80], help='Filter Number ')
 parser.add_argument('--pooling_method', default=[[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1],
                                                  [1, 1, 0, 0], [1, 0, 1, 0], [1, 0, 0, 1], [0, 1, 1, 0],
                                                  [0, 1, 0, 1], [0, 0, 1, 1], [1, 1, 1, 0], [1, 1, 0, 1],
@@ -24,6 +26,8 @@ parser.add_argument('--pooling_method', default=[[1, 0, 0, 0], [0, 1, 0, 0], [0,
                     help='Pooling methods [mean, max, l1, l2]')
 FLAGS = parser.parse_args()
 
+num_batch_train = FLAGS.num_batch_train
+num_batch_test = FLAGS.num_batch_test
 initial_point = FLAGS.initial_point
 VALID = FLAGS.validation
 ENSEMBLE = FLAGS.ensemble
@@ -76,12 +80,12 @@ def main():
     for i in range(len(angle)):
         print('------------Train ', i, '--------------')
         idx_save, new_xyz_save, final_feature_train, feature_train, pca_params = \
-            pointhop.pointhop_train(train_data, n_newpoint=num_point, n_sample=num_sample, layer_num=num_filter,
+            pointhop.pointhop_train(train_data, n_batch=num_batch_train, n_newpoint=num_point, n_sample=num_sample, layer_num=num_filter,
                                     energy_percent=None)
         print('------------Validation ', i, '--------------')
 
         final_feature_valid, feature_valid = pointhop.pointhop_pred(
-            valid_data, pca_params=pca_params, n_newpoint=num_point, n_sample=num_sample, layer_num=num_filter,
+            valid_data, n_batch=num_batch_test, pca_params=pca_params, n_newpoint=num_point, n_sample=num_sample, layer_num=num_filter,
             idx_save=None, new_xyz_save=None)
 
         feature_train = pointhop.extract(feature_train)
