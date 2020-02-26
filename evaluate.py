@@ -16,8 +16,8 @@ parser.add_argument('--rotation_angle', default=np.pi/4, help='Rotate angle')
 parser.add_argument('--rotation_freq', default=8, help='Rotate time')
 parser.add_argument('--log_dir', default='log', help='Log dir [default: log]')
 parser.add_argument('--num_point', default=[1024, 128, 128, 128], help='Point Number after down sampling')
-parser.add_argument('--num_sample', default=[[64], [64], [64], [64]], help='KNN query number')
-parser.add_argument('--num_filter', default=[[15], [25], [40], [80]], help='Filter Number ')
+parser.add_argument('--num_sample', default=[64, 64, 64, 64], help='KNN query number')
+parser.add_argument('--num_filter', default=[15, 25, 40, 80], help='Filter Number ')
 parser.add_argument('--pooling_method', default=[[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1],
                                                  [1, 1, 0, 0], [1, 0, 1, 0], [1, 0, 0, 1], [0, 1, 1, 0],
                                                  [0, 1, 0, 1], [0, 0, 1, 1], [1, 1, 1, 0], [1, 1, 0, 1],
