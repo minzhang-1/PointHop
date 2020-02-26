@@ -9,6 +9,7 @@ import os
 import time
 
 parser = argparse.ArgumentParser()
+parser.add_argument('--num_batch_test', type=int, default=1, help='Batch Number')
 parser.add_argument('--initial_point', type=int, default=1024, help='Point Number [256/512/1024/2048]')
 parser.add_argument('--ensemble', default=False, help='Ensemble or not')
 parser.add_argument('--rotation_angle', default=np.pi/4, help='Rotate angle')
@@ -24,6 +25,7 @@ parser.add_argument('--pooling_method', default=[[1, 0, 0, 0], [0, 1, 0, 0], [0,
                     help='Pooling methods [mean, max, l1, l2]')
 FLAGS = parser.parse_args()
 
+num_batch_test = FLAGS.num_batch_test
 initial_point = FLAGS.initial_point
 ENSEMBLE = FLAGS.ensemble
 angle_rotation = FLAGS.rotation_angle
@@ -69,7 +71,7 @@ def main():
         pca_params = params['stage %d pca_params' % i]
 
         final_feature, feature = pointhop.pointhop_pred(
-            test_data, pca_params=pca_params, n_newpoint=num_point, n_sample=num_sample, layer_num=num_filter,
+            test_data, n_batch=num_batch_test, pca_params=pca_params, n_newpoint=num_point, n_sample=num_sample, layer_num=num_filter,
             idx_save=None, new_xyz_save=None)
 
         feature = pointhop.extract(feature)
