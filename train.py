@@ -7,6 +7,8 @@ import data_utils
 import os
 import time
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--num_batch_train', type=int, default=20, help='Batch Number')
 parser.add_argument('--num_batch_test', type=int, default=1, help='Batch Number')
@@ -56,8 +58,8 @@ def main():
     time_start = time.time()
 
     # load data
-    train_data, train_label = modelnet_data.data_load(num_point=initial_point, data_dir='modelnet40_ply_hdf5_2048', train=True)
-    test_data, test_label = modelnet_data.data_load(num_point=initial_point, data_dir='modelnet40_ply_hdf5_2048', train=False)
+    train_data, train_label = modelnet_data.data_load(num_point=initial_point, data_dir=os.path.join(BASE_DIR, 'modelnet40_ply_hdf5_2048'), train=True)
+    test_data, test_label = modelnet_data.data_load(num_point=initial_point, data_dir=os.path.join(BASE_DIR, 'modelnet40_ply_hdf5_2048'), train=False)
 
     # validation set
     if VALID:

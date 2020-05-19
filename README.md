@@ -10,6 +10,9 @@ We address the problem of unordered point cloud data using a space partitioning 
 
 In this repository, we release code and data for training a PointHop classification network on point clouds sampled from 3D shapes.
 
+### Spark version
+This implementation has a high requirement for memory. If you only have 16/32GB memory, please use our [new distributed version](https://github.com/minzhang-1/PointHop-PointHop2_Spark) which is built upon Apache Spark. The new version implements the baseline within 20 minutes, using less than 12GB memory.
+
 ### Citation
 If you find our work useful in your research, please consider citing:
 
@@ -41,7 +44,9 @@ After the above training, we can evaluate the single model.
 
 If you would like to achieve better performance, you can change the argument `ensemble` from `False` to `True` in both `train.py` and `evaluate.py`.
 
-If you run the code on your laptop with small memory, you can change the argument `num_batch_train` or `num_batch_test` larger. To get the same speed as the paper, set `num_batch_train` as 1 and `num_batch_test` as 1.
+If you run the code on your laptop with small memory, you can change the argument `num_batch_train` or `num_batch_test` larger. To get the same speed and performance as the paper, set `num_batch_train` as 1 and `num_batch_test` as 1 and change `incremenntalpca` to `pca` in pointhop.py
+
+
 
 Log files and network parameters will be saved to `log` folder. Point clouds of <a href="http://modelnet.cs.princeton.edu/" target="_blank">ModelNet40</a> models in HDF5 files will be automatically downloaded (416MB) to the data folder. Each point cloud contains 2048 points uniformly sampled from a shape surface. Each cloud is zero-mean and normalized into an unit sphere. There are also text files in `data/modelnet40_ply_hdf5_2048` specifying the ids of shapes in h5 files.
 
