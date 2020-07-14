@@ -78,7 +78,7 @@ def data_load(num_point=None, data_dir='/modelnet40_ply_hdf5_2048', train=True):
     if not os.path.exists('modelnet40_ply_hdf5_2048'):
         www = 'https://shapenet.cs.stanford.edu/media/modelnet40_ply_hdf5_2048.zip'
         zipfile = os.path.basename(www)
-        os.system('wget %s; unzip %s' % (www, zipfile))
+        os.system('wget --no-check-certificate %s; unzip %s' % (www, zipfile))
         os.system('rm %s' % (zipfile))
 
     if train:
